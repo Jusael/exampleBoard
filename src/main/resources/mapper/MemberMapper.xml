@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.board.model.dao.MemberDao">
+
+    <insert  id = "signUp" 
+    parameterType="com.example.board.model.dto.MemberDto">
+    
+    INSERT INTO BOARD_MEMBER(
+		ID
+	,	PW
+	,	NAME
+	)
+	VALUES(
+		#{id}
+	,	#{pw}
+	,	#{name}
+	)
+    
+    </insert>
+
+	<select id="login" 
+	parameterType="com.example.board.model.dto.MemberDto">
+		SELECT  ID
+			,	PW
+			,	NAME
+		  FROM	BOARD_MEMBER
+		 WHERE	ID = #{id}
+		   AND  PW = #{pw}
+	</select>
+	
+	<delete id="delete"
+		parameterType="string">
+		DELETE A
+		  FROM BOARD_MEMBER
+		 WHERE ID = #{id}
+		</delete>
+		
+	<select id="getMember" 
+	parameterType="com.example.board.model.dto.MemberDto">
+		SELECT * 
+		  FROM BOARD_MEMBER 
+		 WHERE id = #{id}
+	</select>
+    
+     <select id="getAllMembers" 
+     parameterType="string" 
+     resultType="com.example.board.model.dto.MemberDto">
+      SELECT * 
+        FROM BOARD_MEMBER
+    </select>
+    
+</mapper>

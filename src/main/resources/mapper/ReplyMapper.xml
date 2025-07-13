@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="replyMapper">
+	<insert id="write" parameterType="com.example.board.model.dto.ReplyDto">
+	    INSERT INTO SPRING_REPLY (REPLY_NUM, REPLY_CONTENT, REPLY_WRITER, BOARD_NUM)
+	    VALUES (#{replyNum, jdbcType=VARCHAR}, #{replyContent, jdbcType=VARCHAR}, #{replyWriter, jdbcType=VARCHAR}, #{boardNum, jdbcType=INTEGER})
+   </insert>
+
+   <select id="findSearch" parameterType="int" resultType="com.example.board.model.dto.ReplyDto">
+      SELECT REPLY_NUM, REPLY_CONTENT, REPLY_WRITER, BOARD_NUM
+      FROM SPRING_REPLY
+      WHERE BOARD_NUM= #{boardNum}
+   </select>
+   
+</mapper>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.board.model.dao.BoardDao">
+
+	<insert id="write" parameterType="com.example.board.model.dto.BoardDto">
+	    INSERT INTO SPRING_BOARD (
+  NUM, ID, NAME, TITLE, CONTENT, INSERT_DATE
+)
+VALUES (
+  #{num, jdbcType=INTEGER},
+  #{id, jdbcType=VARCHAR},
+  #{name, jdbcType=VARCHAR},
+  #{title, jdbcType=VARCHAR},
+  #{content, jdbcType=VARCHAR},
+  NOW()
+)
+   </insert>
+
+   <select id="findAll"
+      resultType="com.example.board.model.dto.BoardDto">
+      SELECT NUM, ID, NAME, TITLE, CONTENT, INSERT_DATE as insertDate
+      FROM
+      SPRING_BOARD
+   </select>
+   
+   <update id="update" parameterType="BoardDto">
+      UPDATE SPRING_BOARD
+      SET TITLE = #{title} , CONTENT = #{content}
+      WHERE NUM = #{num}
+   </update>
+   
+    <select id="modify" parameterType="BoardDto" resultType="BoardDto">
+      SELECT ID, NAME, TITLE, CONTENT, INSERT_DATE as insertDate
+      FROM SPRING_BOARD
+      WHERE NUM = #{num}
+   </select>
+
+    <delete id="delete" parameterType="int">
+      DELETE FROM SPRING_BOARD
+      WHERE NUM = #{num}
+   </delete>
+
+   <select id="findSearch" parameterType="string" resultType="BoardDto">
+      SELECT NUM, ID, NAME, TITLE, CONTENT,  INSERT_DATE as insertDate
+      FROM SPRING_BOARD
+      WHERE NAME = #{name}
+   </select>
+
+   <select id="detail" parameterType="int" 
+      resultType="com.example.board.model.dto.BoardDto">
+      SELECT NUM, ID, NAME, TITLE, CONTENT,  INSERT_DATE as insertDate
+      FROM
+      SPRING_BOARD
+      WHERE NUM= #{num}
+   </select>
+
+</mapper>
